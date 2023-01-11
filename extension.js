@@ -100,22 +100,21 @@ function functionComments(editor) {
 			}
 		}
 		let prefix = '\n\t///\t'
-		let requireParamsComments = `${prefix}---- Required params ----${prefix}`
+		let requireParamsComments = `${prefix} ### ---- Required params ----${prefix}`
 		requireParamsValue.forEach(element => {
-			requireParamsComments += `${prefix}${element}${prefix}`
+			requireParamsComments += `${prefix}\`${element}\`${prefix}`
 		});
 
-		let optionalParamsComments = `${prefix}---- Optional params ----${prefix}`
+		let optionalParamsComments = `${prefix} ### ---- Optional params ----${prefix}`
 		optionalParamsValue.forEach(element => {
-			optionalParamsComments += `${prefix}${element}${prefix}`
+			optionalParamsComments += `${prefix}\`${element}\`${prefix}`
 		});
-
-		let returnValueStr = returnValue === '' ? '' : `${prefix}${prefix}---- Return Value ----${prefix}${prefix}${returnValue}`
-		let funcNameStr = `${prefix}${prefix}---- Function Name ----${prefix}${prefix}${funcNameValue}${prefix}`
+		let desStr = `\t///\t ###\t\`Desc:\`\t`
+		let returnValueStr = returnValue === '' ? '' : `${prefix}${prefix} ### ---- Return Value ----${prefix}${prefix}\`${returnValue}\``
+		let funcNameStr = `${prefix}${prefix} ### ---- Function Name ----${prefix}${prefix}\`${funcNameValue}\`${prefix}`
 		let requireParamsStr = requireParamsValue.length == 0 ? '' : `${requireParamsComments}`
 		let optionalParamsStr = optionalParamsValue.length == 0 ? '' : `${optionalParamsComments}`
-		let str = `${returnValueStr}${funcNameStr}${requireParamsStr}${optionalParamsStr}`
-		console.log(str)
+		let str = `${desStr}${returnValueStr}${funcNameStr}${requireParamsStr}${optionalParamsStr}`
 		return str
 	} else {
 		return '';
