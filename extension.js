@@ -83,6 +83,7 @@ function functionComments(editor) {
 		if (paramStrA.length >= 2) {
 			let paramStr = paramStrA[0]
 			paramStr = paramStr.replaceAll(',}', '')
+			paramStr = paramStr.replaceAll('}', '')
 			let paramsSplit = paramStr.split('{')
 			let requireParamsStr = paramsSplit[0]
 			requireParamsValue = requireParamsStr.split(',')
@@ -109,7 +110,13 @@ function functionComments(editor) {
 			optionalParamsComments += `${prefix}${element}${prefix}`
 		});
 
-		return `${prefix}${prefix}---- Return Value ----${prefix}${prefix}${returnValue}${prefix}${prefix}---- Function Name ----${prefix}${prefix}${funcNameValue}${prefix}${requireParamsComments}${optionalParamsComments}`
+		let returnValueStr = returnValue === '' ? '' : `${prefix}${prefix}---- Return Value ----${prefix}${prefix}${returnValue}`
+		let funcNameStr = `${prefix}${prefix}---- Function Name ----${prefix}${prefix}${funcNameValue}${prefix}`
+		let requireParamsStr = requireParamsValue.length == 0 ? '' : `${requireParamsComments}`
+		let optionalParamsStr = optionalParamsValue.length == 0 ? '' : `${optionalParamsComments}`
+		let str = `${returnValueStr}${funcNameStr}${requireParamsStr}${optionalParamsStr}`
+		console.log(str)
+		return str
 	} else {
 		return '';
 	}
